@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+		stage ( 'Unit Test') {
+            steps {
+            
+                sh 'ant -f test.xml -v'
+				junit 'reports/result.xml'
+            }
+        }
         stage ( 'Build') {
             steps {
                 echo "Testing the build stage"
