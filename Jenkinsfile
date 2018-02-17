@@ -12,7 +12,7 @@ pipeline {
         }
         stage ( 'Build') {
             steps {
-                echo "Testing the build stage"
+                
                 sh 'ant -f build.xml -v'
 				
             }
@@ -28,5 +28,10 @@ pipeline {
                 sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all"
             }
         }
+		stage ( 'Functional testing'){
+			steps {
+				sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 4 5"
+			}
+		}
 	}
 }
