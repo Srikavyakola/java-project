@@ -30,6 +30,7 @@ pipeline {
         }
 		stage ( 'Functional testing'){
 			steps {
+				sh "wget http://srikavyakola3.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
 				sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 4 5"
 			}
 		}
