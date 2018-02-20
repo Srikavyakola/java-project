@@ -33,7 +33,7 @@ pipeline {
             }
         }
 		
-		stage ( 'Functional testing'){
+		stage ( 'Functional testing') {
 			steps {
 				sh "wget http://srikavyakola3.mylabserver.com/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BUILD_NUMBER}.jar"
 				sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 4 5"
@@ -61,7 +61,7 @@ pipeline {
 				sh 'git checkout master'
 				echo "merging development into master"
 				sh 'git merge development'
-				echo "pushing to origin master"
+				echo "test pushing to origin master"
 				sh 'git push origin master'
 			}
 		}
