@@ -9,7 +9,7 @@ pipeline {
     stages {
 		stage ( 'Say Hello') {
 			steps {
-				sayHello 'How are you doing'
+				sayHello 'How are you doing!'
 			}
 
 		}
