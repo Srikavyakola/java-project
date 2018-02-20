@@ -28,7 +28,7 @@ pipeline {
 		
 		stage ( 'Deploy') {
             steps {
-				sh "mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}"
+				
                 sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
             }
         }
@@ -41,28 +41,28 @@ pipeline {
 		}
 		stage ( 'Promote to green') {
 			when {
-				branch 'development'
+				branch 'master'
 			}
 			steps {
 				sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
 			}
 		
 		}
-		stage ('Promoting master branch to developement') {
+		stage ('Promoting development branch to master') {
 			when {
-				branch 'master'
+				branch 'development'
 			}
 			steps {
 				echo "stashing any local changes"
 				sh 'git stash'
+				echo "checking out development branch"
+				sh 'git checkout development'
 				echo "checking out master branch"
 				sh 'git checkout master'
-				echo "checking out developement branch"
-				sh 'git checkout development'
-				echo "merging master into development"
-				sh 'git merge master'
-				echo "pushing to origin development"
-				sh 'git push origin development'
+				echo "merging development into master"
+				sh 'git merge development'
+				echo "pushing to origin master"
+				sh 'git push origin master'
 			}
 		}
 	}
