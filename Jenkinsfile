@@ -7,6 +7,12 @@ pipeline {
     }
 	
     stages {
+		stage ( 'Say Hello') {
+			steps {
+				sayHello 'How are you doing'
+			}
+
+		}
 		stage ( 'Unit Test') {
             steps {
             
